@@ -1,1 +1,114 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="description" content="Webpage description goes here" />
+	<meta charset="utf-8">
+	<title>Tuner</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="CTSF">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  	
+	<script type="text/javascript">
+	
+		function setupListeners(){
+			
+		<!-- Params filepicker enabling -->
+			document.getElementById("params_yes").addEventListener("click", function() {document.getElementById("params_filepicker").disabled = false});
+			document.getElementById("params_no").addEventListener("click", function() {document.getElementById("params_filepicker").disabled = true});
+			
+		<!-- Intervals input changing -->
+			document.getElementById("byfile").addEventListener("click", function() {
+				document.getElementById("intervals_filepicker").style = "";
+				document.getElementById("intervals_list").style.display = "none";
+				document.getElementById("intervals_single").style.display = "none";
+				
+				document.getElementById("iFilepicker").disabled = false;
+				document.getElementById("iList").disabled = true;
+				document.getElementById("iSingle").disabled = true;
+				});
+				
+			document.getElementById("bylist").addEventListener("click", function() {
+				document.getElementById("intervals_filepicker").style.display = "none";
+				document.getElementById("intervals_list").style = "";
+				document.getElementById("intervals_single").style.display = "none";
+				
+				document.getElementById("iFilepicker").disabled = true;
+				document.getElementById("iList").disabled = false;
+				document.getElementById("iSingle").disabled = true;
+				});
+				
+			document.getElementById("single").addEventListener("click", function() {
+				document.getElementById("intervals_list").style.display = "none";
+				document.getElementById("intervals_filepicker").style.display = "none";
+				document.getElementById("intervals_single").style = "";
+
+				document.getElementById("iFilepicker").disabled = true;
+				document.getElementById("iList").disabled = true;
+				document.getElementById("iSingle").disabled = false;
+				});
+			
+		};
+	</script>
+    
+</head>
+<body onload="setupListeners()">
+<h3>Tuner: .xlsx Sheet Musicalizer</h3>
+	<form>
+	<!-- Filepicker for sheet to be tuned -->
+		<p>
+		Select sheet to be tuned:
+		<input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="tune_file" />
+		<br><br>
+		
+<!-- Radios for tuning by params and interval -->
+	
+<!-- Params tuning radios -->
+		Tune input sheet with parameter file?
+		
+		<input type="radio" id="params_yes" name="params" value="params_Y" checked/>
+		<label for="paramsY">Yes</label>
+		
+		<input type="radio" id="params_no" name="params" value="params_N"/>
+		<label for="paramsN">No</label>
+		<br>
+		
+<!-- Filepicker for parameter sheet -->
+		<label for="params_filepicker">Select .xlsx file containing parameters to tune to: </label>
+		<input type="file" id = "params_filepicker" name="params_file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+		<br><br>
+		
+<!-- Interval tuning radios -->
+		Tune input sheet to several interval durations?
+		<input type="radio" id="byfile" name="intervals" value="intervals_sheet" checked/><label for="byfile">By Params</label>
+		<input type="radio" id="bylist" name="intervals" value="intervals_list"/><label for="bylist">By List</label>
+		<input type="radio" id="single" name="intervals" value="intervals_no"/><label for="single">Tune to single duration</label>
+		<br>
+		
+<!-- Data Entry for intervals -->
+
+<!-- Filepicker -->
+	<span id="intervals_filepicker" style="">
+		<label for="iFilepicker">Select .xlsx file containing interval durations to tune to: </label>
+		<input type="file" id="iFilepicker" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+	</span>
+	
+<!-- List Input -->
+	<span id="intervals_list" style="visibility: hidden">
+		<label for="iList">Enter comma-separated values for interval durations to tune to: </label>
+		<input type="text" id="iList" pattern = "/^[,0-9]+$/">
+	</span>
+	
+<!-- Single Input -->
+	<span id="intervals_single" style="visibility: hidden">
+		<label for="iSingle">Enter integer value of interval duration to tune to: </label>
+		<input type="text" id="iSingle" maxlength=2 pattern="/\d/">
+	</span><br>
+	
+	<input type="button" id="submitButton" value="Tune with selected settings">
+	</p>
+	</form>
+		
+</body>
+</html>
