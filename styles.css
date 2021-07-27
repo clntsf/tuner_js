@@ -1,0 +1,8 @@
+*::before, *::after, *{
+    box-sizing: "border-box";
+    font-family: 'Times New Roman', Times, serif;
+}
+.notes-grid{
+    display: grid;
+    grid-template-columns: repeat(4,30px);
+}

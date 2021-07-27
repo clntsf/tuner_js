@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <script type="text/javascript" src="JSZip/jszip.js"></script>
+    <script type="text/javascript" src="JSZip/FileSaver.js"></script>
+    <script type="text/javascript" src="filereader.js"></script>
+    <script type="text/javascript" src="setup.js"></script>
+    <script type="text/javascript" src="test.js"></script>
+
+</head>
+<body onload=setup()>
+
+    <input type="file" name="Input File" id = "file-input"><br><br>
+    <label>Interval (x10ms): <input type="number" id="interval-input" min=5 max = 100 step=5 value = 10></label><br><br>
+    <label>Tune Frequencies: <input type="checkbox" id="tune-freqs" checked></label>
+    
+    <label id='notes-label'><br><br>Scale Notes:</label>
+
+    <div id="scale-notes" class="notes-grid" hidden>
+        <span>A</span> <input class="note-input" type="checkbox" value=1>
+        <span>A#</span> <input class="note-input" type="checkbox" value=2>
+        <span>B</span> <input class="note-input" type="checkbox" value=3>
+        <span>C</span> <input class="note-input" type="checkbox" value=4>
+        <span>C#</span> <input class="note-input" type="checkbox" value=5>
+        <span>D</span> <input class="note-input" type="checkbox" value=6>
+        <span>D#</span> <input class="note-input" class="note-input" type="checkbox" value=7>
+        <span>E</span> <input class="note-input" type="checkbox" value=8>
+        <span>F</span> <input class="note-input" type="checkbox" value=9>
+        <span>F#</span> <input class="note-input" type="checkbox" value=10>
+        <span>G</span> <input class="note-input" type="checkbox" value=11>
+        <span>G#</span> <input class="note-input" type="checkbox" value=12>
+        <br>
+    </div>
+    <p id="t"></p>
+    <button onclick=readFile()>Tune File</button><br>
+    <button id="download-button" disabled>Download Tuned File as .zip</button>
+    <button onclick = test()>Test</button>
+</body>
+</html>
