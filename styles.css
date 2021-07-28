@@ -25,6 +25,7 @@ body{
     align-content:center;
     grid-template-columns: repeat(2,max-content);
     grid-gap: 8px;
+    font-size: 90%;
 }
 
 .bold-label{
