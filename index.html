@@ -16,30 +16,61 @@
 </head>
 <body onload=setup()>
 
-    <input type="file" name="Input File" id = "file-input"><br><br>
+    <input type="file" name="Input File" id = "file-input" onchange =  "if (this.files[0]!=undefined) file=this.files[0]; filename = file.name; file.text().then(text => changeFileText(text))")><br>
     <label>Interval (x10ms): <input type="number" id="interval-input" min=5 max = 100 step=5 value = 10></label><br><br>
-    <label>Tune Frequencies: <input type="checkbox" id="tune-freqs" checked></label>
-    
-    <label id='notes-label'><br><br>Scale Notes:</label>
 
-    <div id="scale-notes" class="notes-grid" hidden>
-        <span>A</span> <input class="note-input" type="checkbox" value=1>
-        <span>A#</span> <input class="note-input" type="checkbox" value=2>
-        <span>B</span> <input class="note-input" type="checkbox" value=3>
-        <span>C</span> <input class="note-input" type="checkbox" value=4>
-        <span>C#</span> <input class="note-input" type="checkbox" value=5>
-        <span>D</span> <input class="note-input" type="checkbox" value=6>
-        <span>D#</span> <input class="note-input" class="note-input" type="checkbox" value=7>
-        <span>E</span> <input class="note-input" type="checkbox" value=8>
-        <span>F</span> <input class="note-input" type="checkbox" value=9>
-        <span>F#</span> <input class="note-input" type="checkbox" value=10>
-        <span>G</span> <input class="note-input" type="checkbox" value=11>
-        <span>G#</span> <input class="note-input" type="checkbox" value=12>
-        <br>
+    <div id="force-freqs-checkbox">
+        <span>Force Frequencies to musical notes: &nbsp;</span>
+        <input type="checkbox" id="tune-freqs" onchange = freqForceCheckboxChange(this.checked) checked>
     </div>
-    <p id="t"></p>
-    <button onclick=readFile()>Tune File</button><br>
-    <button id="download-button" disabled>Download Tuned File as .zip</button>
-    <button onclick = test()>Test</button>
+
+    <div id="tunetype-variants">
+        <div class="sub-div">
+            <span class="bold-label">Force Frequencies:</span>
+            <div id="tunetype-radios" class="grid-column">
+                <span class="grid-option">By Notes </span> <input type="radio" id = "tune-by-notes" name="tunetype-radio" value=1 onclick=tunetypeRadioChange(this.value) checked>
+                <span class="grid-option">By Scale </span> <input type="radio" id = "tune-by-scale" name="tunetype-radio" value=2 onclick=tunetypeRadioChange(this.value)>
+            </div>
+        </div>
+
+        <div class="sub-div" id="notes-tunetype-container">
+            <span class="bold-label">Notes to Force by:</span>
+            <div id="scale-notes-grid" class="four-col-grid">
+                <span>A</span> <input type="checkbox" value=1>
+                <span>A#</span> <input type="checkbox" value=2>
+                <span>B</span> <input type="checkbox" value=3>
+                <span>C</span> <input type="checkbox" value=4>
+                <span>C#</span> <input type="checkbox" value=5>
+                <span>D</span> <input type="checkbox" value=6>
+                <span>D#</span> <input type="checkbox" value=7>
+                <span>E</span> <input type="checkbox" value=8>
+                <span>F</span> <input type="checkbox" value=9>
+                <span>F#</span> <input type="checkbox" value=10>
+                <span>G</span> <input type="checkbox" value=11>
+                <span>G#</span> <input type="checkbox" value=12>
+            </div>
+        </div>
+
+        <div class="sub-div" id="scales-tunetype-container" style="display: none">
+            <span class="bold-label">Scale to Force by: </span>
+            <div id="scale-select-grid" class="four-col-grid" style="grid-row-gap: 5px">
+                <span>A Maj. Scale</span> <input name="scale-input" type="radio" value=1 checked>
+                <span>A# Maj. Scale</span> <input name="scale-input" type="radio" value=2>
+                <span>B Maj. Scale</span> <input name="scale-input" type="radio" value=3>
+                <span>C Maj. Scale</span> <input name="scale-input" type="radio" value=4>
+                <span>C# Maj. Scale</span> <input name="scale-input" type="radio" value=5>
+                <span>D Maj. Scale</span> <input name="scale-input" type="radio" value=6>
+                <span>D# Maj. Scale</span> <input name="scale-input" type="radio" value=7>
+                <span>E Maj. Scale</span> <input name="scale-input" type="radio" value=8>
+                <span>F Maj. Scale</span> <input name="scale-input" type="radio" value=9>
+                <span>F Maj. Scale#</span> <input name="scale-input" type="radio" value=10>
+                <span>G Maj. Scale</span> <input name="scale-input" type="radio" value=11>
+                <span>G# Maj. Scale</span> <input name="scale-input" type="radio" value=12>
+            </div>
+        </div>
+    </div>
+
+    <button onclick=tuneCols()>Tune File</button><br>
+    <button id="download-button" onclick=outputZipFile() disabled>Download Tuned File as .zip</button>
 </body>
 </html>
