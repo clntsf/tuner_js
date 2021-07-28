@@ -2,7 +2,31 @@
     box-sizing: "border-box";
     font-family: 'Times New Roman', Times, serif;
 }
-.notes-grid{
+
+body{
+    padding: 10px 15px;
+}
+
+.four-col-grid{
     display: grid;
-    grid-template-columns: repeat(4,30px);
+    grid-template-columns: repeat(4,max-content);
+    grid-column-gap: 15px; grid-row-gap: 1px;
+    font-size: 90%;
+    padding: 5px 0px;
+}
+
+.sub-div{
+    padding: 5px 0px;
+}
+
+.grid-column{
+    display: grid;
+    padding: 8px 0px;
+    align-content:center;
+    grid-template-columns: repeat(2,max-content);
+    grid-gap: 8px;
+}
+
+.bold-label{
+    font-weight: bold;
 }
