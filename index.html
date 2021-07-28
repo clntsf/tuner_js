@@ -16,7 +16,7 @@
 </head>
 <body onload=setup()>
 
-    <input type="file" name="Input File" id = "file-input" onchange =  "if (this.files[0]!=undefined) file=this.files[0]; filename = file.name; file.text().then(text => changeFileText(text))")><br>
+    <input type="file" name="Input File" id = "file-input" onchange =  "if (this.files[0]!=undefined) file=this.files[0]; filename = file.name.slice(0,-4); file.text().then(text => changeFileText(text))")><br>
     <label>Interval (x10ms): <input type="number" id="interval-input" min=5 max = 100 step=5 value = 10></label><br><br>
 
     <div id="force-freqs-checkbox">
