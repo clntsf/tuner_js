@@ -3,7 +3,6 @@ function constructScaleFreqs(scale){
     for(i=0;i<8;i++) for(j=0;j<scale.length;j++) if((12*i)+scale[j]<=88) output.push(Math.round(10000*toFreq(12*i+scale[j]-1))/10000);
     return output
 }
-
 function toFreq(note) {return 27.5 * Math.pow(2,(note)/12);}
 function getClosest(pool, target){abs_dist = pool.map(x => Math.abs(x-target)); return scale_notes[abs_dist.indexOf(Math.min(...abs_dist))]}
 
@@ -21,16 +20,15 @@ function tuneCols(){
 
     if(tune_freqs) {
         if (tunetype == "notes") {
-            scale = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(x => parseInt(x.value));
-            if (scale.length == 0) alert('Input some notes to force to'); return
+            scale = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(x => parseInt(x.value)).slice(1);
+            if (scale.length == 0) {alert('Input some notes to force to'); return}
         }
         else {
             note = parseInt(document.querySelector("input[name='scale-input']:checked").value);
             scale = default_scale.map(function(x){if (x+note>12) return (x+note) % 12; else return x+note}).sort(function(a,b){return a-b});
         }
-        scale_notes = constructScaleFreqs(scale)
+        scale_notes = constructScaleFreqs(scale);
     }
-
     for (i=0;i<formants;i++){
         const freq_col=df.map(x=>x[2*i+1]);
         const amp_col=df.map(x=>x[2*i+2]);
