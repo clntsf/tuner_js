@@ -21,7 +21,7 @@ function tuneCols(){
 
     if(tune_freqs) {
         if (tunetype == "notes") {
-            scale = Array.from(document.querySelectorAll('.note-input:checked')).map(x => parseInt(x.value)); alert(scale);
+            scale = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(x => parseInt(x.value));
             if (scale.length == 0) alert('Input some notes to force to'); return
         }
         else {
